@@ -12,19 +12,21 @@ export const useItemStore = defineStore("item", {
   }),
   actions: {
     async fetchItems() {
-      const response = await axios.get(`${API_URL}`);
+      const response = await axios.get(
+        `${API_URL}/items`,
+      );
       this.items = response.data;
     },
     async addItem(item: Item) {
-      await axios.post(`${API_URL}`, item);
+      await axios.post(`${API_URL}/items`, item);
       await this.fetchItems();
     },
     async updateItem(id: string, item: Item) {
-      await axios.put(`${API_URL}/${id}`, item);
+      await axios.put(`${API_URL}/items/${id}`, item);
       await this.fetchItems();
     },
     async deleteItem(id: string): Promise<void> {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${API_URL}/items/${id}`);
       await this.fetchItems();
     },
     openDialog(item = null) {
